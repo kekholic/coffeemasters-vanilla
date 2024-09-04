@@ -32,11 +32,10 @@ const Router = {
                 pageElement.textContent = "Your order";
                 break;
             default: 
-                if (route.startsWith("/product/")) {
+                if (route.startsWith("/product-")) {
                     pageElement = document.createElement("details-page");
-                    pageElement.textContent = "Details";
-                    const paramId = route.substring(route.lastIndexOf("/") + 1);
-                    pageElement.dataset.id = paramId;
+                    const paramId = route.substring(route.lastIndexOf("-")+1);
+                    pageElement.dataset.productId = paramId;
                 }
         }
 
@@ -46,6 +45,10 @@ const Router = {
             cache.appendChild(pageElement);
             window.scrollX = 0;
             window.scrollY = 0;
+        } else {
+            // 404
+            document.querySelector("main").innerHTML = "Oops, 404!"
+
         }
     }
 }
